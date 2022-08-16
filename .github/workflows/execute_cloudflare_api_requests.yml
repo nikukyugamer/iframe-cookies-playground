@@ -1,0 +1,22 @@
+name: Cloudflare キャッシュ API
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '37 * * * *'
+
+jobs:
+  set_development_mode_to_on:
+    name: 「開発モード」を "on" にする
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
+      CLOUDFLARE_AUTH_KEY: ${{ secrets.CLOUDFLARE_AUTH_KEY }}
+      CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+    steps:
+    - name: コードをチェックアウトする
+      uses: actions/checkout@v3
+    - name: 所定の API を叩いて「開発モード」を "on" にする
+      # https://api.cloudflare.com/#zone-settings-get-development-mode-setting
+      run: |
+        ./set_development_mode_on_cloudflare.sh
