@@ -15,7 +15,7 @@ jobs:
       CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
     steps:
     - name: コードをチェックアウトする
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     - name: 所定の API を叩いて「開発モード」を "on" にする
       # https://api.cloudflare.com/#zone-settings-get-development-mode-setting
       run: |
